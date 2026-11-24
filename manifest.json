@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "Bili Dolby Bridge",
+  "version": "0.3.0",
+  "description": "Prefer Bilibili Dolby audio in Chrome and Edge.",
+  "permissions": [
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://*.bilibili.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.bilibili.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "world": "ISOLATED"
+    },
+    {
+      "matches": [
+        "https://www.bilibili.com/*"
+      ],
+      "js": ["page-bridge.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "options.html",
+  "action": {
+    "default_title": "Bili Dolby Bridge",
+    "default_popup": "popup.html"
+  }
+}

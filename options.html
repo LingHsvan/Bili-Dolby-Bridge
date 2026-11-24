@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bili Dolby Bridge</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f5f7fa;
+        color: #18212f;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; min-width: 320px; padding: 32px; }
+      main { max-width: 760px; margin: 0 auto; }
+      h1 { margin: 0 0 8px; font-size: 28px; }
+      .lead { margin: 0 0 28px; color: #5f6b7a; line-height: 1.65; }
+      section { background: #fff; border: 1px solid #e4e9f0; border-radius: 8px; padding: 22px; }
+      section + section { margin-top: 16px; }
+      .row { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+      .label { font-weight: 650; }
+      .hint { margin-top: 6px; color: #687587; font-size: 13px; line-height: 1.55; }
+      .switch { position: relative; display: inline-flex; width: 46px; height: 26px; flex: 0 0 auto; }
+      .switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+      .track { width: 46px; height: 26px; border-radius: 999px; background: #c8d1dc; transition: background .15s ease; }
+      .track::after { content: ""; position: absolute; width: 20px; height: 20px; left: 3px; top: 3px; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px #0003; transition: transform .15s ease; }
+      .switch input:checked + .track { background: #1867d2; }
+      .switch input:checked + .track::after { transform: translateX(20px); }
+      .status { display: grid; grid-template-columns: 150px 1fr; gap: 12px 18px; margin: 0; }
+      dt { color: #667386; }
+      dd { margin: 0; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+      .notice { padding: 12px 14px; border-radius: 6px; background: #f2f5f9; color: #556276; font-size: 13px; line-height: 1.6; }
+      .good { color: #13734e; }
+      .bad { color: #b3261e; }
+      @media (prefers-color-scheme: dark) {
+        :root { background: #11161d; color: #e6ebf2; }
+        .lead, .hint, dt { color: #9eabb9; }
+        section { background: #1a222d; border-color: #2b3542; }
+        .track { background: #4b5869; }
+        .notice { background: #222c38; color: #aeb9c7; }
+      }
+      @media (max-width: 560px) {
+        body { padding: 20px; }
+        .status { grid-template-columns: 1fr; gap: 4px; }
+        dt { margin-top: 10px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Bili Dolby Bridge</h1>
+      <p class="lead">在 B 站视频页优先选择账号可用的杜比全景声音轨。扩展只作用于当前登录态，不绕过大会员、地区或版权限制。</p>
+
+      <section>
+        <div class="row">
+          <div>
+            <div class="label">自动优先杜比全景声</div>
+            <div class="hint">关闭后不影响 B 站原生播放器和已有的杜比设置。</div>
+          </div>
+          <label class="switch" aria-label="自动优先杜比全景声">
+            <input id="enabled" type="checkbox">
+            <span class="track"></span>
+          </label>
+        </div>
+      </section>
+
+      <section>
+        <div class="label" style="margin-bottom: 16px">当前状态</div>
+        <dl class="status">
+          <dt>E-AC-3 解码</dt>
+          <dd id="capability">检查中</dd>
+          <dt>原生 E-AC-3</dt>
+          <dd id="native-support">-</dd>
+          <dt>最近音轨</dt>
+          <dd id="track">-</dd>
+          <dt>最近事件</dt>
+          <dd id="event">-</dd>
+          <dt>最近错误</dt>
+          <dd id="error">-</dd>
+          <dt>更新时间</dt>
+          <dd id="updated">-</dd>
+        </dl>
+      </section>
+
+      <section class="notice">
+        如果 Chrome 报告原生 E-AC-3 不可用，扩展仍会按 B 站现有的兼容路径尝试杜比，并以实际播放 30250 音轨作为成功标准。设备无法解码时会保留普通音轨。实际多声道渲染取决于系统声卡、扬声器与耳机设置。
+      </section>
+    </main>
+    <script src="storage.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>

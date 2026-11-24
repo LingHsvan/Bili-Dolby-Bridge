@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bili Dolby Bridge</title>
+    <style>
+      :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+      body { width: 300px; margin: 0; padding: 16px; background: Canvas; color: CanvasText; }
+      header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+      h1 { margin: 0; font-size: 15px; }
+      #state { margin: 12px 0; padding: 10px 12px; border-radius: 6px; background: color-mix(in srgb, CanvasText 7%, Canvas); font-size: 13px; }
+      .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13px; }
+      button { border: 1px solid color-mix(in srgb, CanvasText 22%, transparent); border-radius: 5px; padding: 6px 10px; background: Canvas; color: CanvasText; cursor: pointer; }
+      button:hover { background: color-mix(in srgb, CanvasText 7%, Canvas); }
+      #track { margin-top: 10px; font-size: 12px; color: color-mix(in srgb, CanvasText 62%, transparent); font-variant-numeric: tabular-nums; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>杜比全景声</h1>
+      <label class="row" title="自动优先杜比全景声">
+        <input id="enabled" type="checkbox">
+      </label>
+    </header>
+    <div id="state">检查中</div>
+    <div class="row">
+      <span>播放状态</span>
+      <button id="options" type="button">设置</button>
+    </div>
+    <div id="track">音轨：-</div>
+    <script src="storage.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
